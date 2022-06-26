@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>ToDo</title>
+    <th:block th:include="blocks/css :: head"/>
+</head>
+<body>
+<div class="container">
+    <th:block th:include="blocks/nav :: div"/>
+    <div class="row">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Название</th>
+                <th scope="col">Описание</th>
+                <th scope="col">Дата создания</th>
+                <th scope="col">Состояние</th>
+            </tr>
+            </thead>
+            <tbody>
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.description}"></td>
+            <td th:text="${#dates.format(item.created, 'dd.MM.yyyy')}"></td>
+            <td>
+                <span th:text="${item.isDone} ? 'Завершено' : 'Не завершено'"></span>
+            </td>
+            </tbody>
+        </table>
+        <form>
+          <span th:if="${!item.isDone}">
+            <button type="submit" class="btn btn-success" th:formaction="@{|/completed/${item.id}|}">Завершить задание</button>
+          </span>
+            <button type="submit" class="btn btn-info" th:formaction="@{|/formUpdateItem/${item.id}|}">Изменить задание</button>
+            <button type="submit" class="btn btn-warning" th:formaction="@{|/delete/${item.id}|}">Удалить задание</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
