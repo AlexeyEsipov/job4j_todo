@@ -31,7 +31,7 @@ public class ItemStore {
         return item;
     }
 
-    public boolean update(int id, Item item) {
+    public void update(int id, Item item) {
         Session session = sf.openSession();
         session.beginTransaction();
         item.setId(id);
@@ -39,10 +39,9 @@ public class ItemStore {
         session.update(item);
         session.getTransaction().commit();
         session.close();
-        return true;
     }
 
-    public boolean delete(int id) {
+    public void delete(int id) {
         Session session = sf.openSession();
         session.beginTransaction();
         Item item = new Item();
@@ -50,7 +49,6 @@ public class ItemStore {
         session.delete(item);
         session.getTransaction().commit();
         session.close();
-        return true;
     }
 
     public List<Item> findAll() {
@@ -99,4 +97,6 @@ public class ItemStore {
         session.getTransaction().commit();
         session.close();
     }
+
+
 }
