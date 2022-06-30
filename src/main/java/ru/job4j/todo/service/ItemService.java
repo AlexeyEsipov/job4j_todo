@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 
 import ru.job4j.todo.model.Item;
+import ru.job4j.todo.model.User;
 import ru.job4j.todo.store.ItemStore;
 
 @ThreadSafe
@@ -17,8 +18,8 @@ public class ItemService {
         this.store = store;
     }
 
-    public Collection<Item> findAll() {
-        return store.findAll();
+    public Collection<Item> findAll(User user) {
+        return store.findAll(user);
     }
 
     public Item add(Item item) {
@@ -41,12 +42,12 @@ public class ItemService {
         return store.findByName(key);
     }
 
-    public Collection<Item> completed() {
-        return store.condition(true);
+    public Collection<Item> completed(User user) {
+        return store.condition(user, true);
     }
 
-    public Collection<Item> notCompleted() {
-        return store.condition(false);
+    public Collection<Item> notCompleted(User user) {
+        return store.condition(user, false);
     }
 
     public void completedId(int id) {

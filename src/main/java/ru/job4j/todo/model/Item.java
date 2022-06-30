@@ -14,6 +14,9 @@ public class Item {
     private String description;
     private Date created;
     private boolean done;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Integer getId() {
         return id;
@@ -55,6 +58,14 @@ public class Item {
         this.done = done;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -75,9 +86,6 @@ public class Item {
 
     @Override
     public String toString() {
-        return "{"
-                + "id='" + id + '\''
-                + ", name='" + name + '\''
-                + '}';
+        return String.format("{id=%s, name=%s", id, name);
     }
 }

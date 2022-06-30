@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import ru.job4j.todo.model.Item;
+import ru.job4j.todo.model.User;
 import ru.job4j.todo.service.ItemService;
+
+import javax.servlet.http.HttpSession;
 
 @ThreadSafe
 @Controller
@@ -21,49 +24,60 @@ public class ItemController {
     }
 
     @GetMapping("/items")
-    public String items(Model model) {
-        model.addAttribute("items", service.findAll());
+    public String items(Model model, HttpSession session) {
+        setUser(model, session);
+        User user = (User) model.getAttribute("user");
+        model.addAttribute("items", service.findAll(user));
         return "items";
     }
 
     @GetMapping("/formAddItem")
-    public String formAddItem(Model model) {
+    public String formAddItem(Model model, HttpSession session) {
+        setUser(model, session);
         return "addItem";
     }
 
 
     @PostMapping("/createItem")
-    public String createItem(@ModelAttribute Item item) {
+    public String createItem(@ModelAttribute Item item, HttpSession session) {
+        item.setUser((User) session.getAttribute("user"));
         service.add(item);
         return "redirect:/items";
     }
 
     @GetMapping("/formUpdateItem/{itemId}")
-    public String formUpdateItem(Model model, @PathVariable("itemId") int id) {
+    public String formUpdateItem(Model model, @PathVariable("itemId") int id, HttpSession session) {
+        setUser(model, session);
         model.addAttribute("item", service.findById(id));
         return "updateItem";
     }
 
     @PostMapping("/updateItem")
-    public String updateItem(@ModelAttribute Item item) {
+    public String updateItem(@ModelAttribute Item item, HttpSession session) {
+        item.setUser((User) session.getAttribute("user"));
         service.update(item.getId(), item);
         return "redirect:/items";
     }
 
     @GetMapping("/completed")
-    public String completed(Model model) {
-        model.addAttribute("items", service.completed());
+    public String completed(Model model, HttpSession session) {
+        setUser(model, session);
+        User user = (User) model.getAttribute("user");
+        model.addAttribute("items", service.completed(user));
         return "completed";
     }
 
     @GetMapping("/notCompleted")
-    public String fresh(Model model) {
-        model.addAttribute("items", service.notCompleted());
+    public String fresh(Model model, HttpSession session) {
+        setUser(model, session);
+        User user = (User) model.getAttribute("user");
+        model.addAttribute("items", service.notCompleted(user));
         return "notCompleted";
     }
 
     @GetMapping("/itemDetails/{itemId}")
-    public String itemDetails(Model model, @PathVariable("itemId") int id) {
+    public String itemDetails(Model model, @PathVariable("itemId") int id, HttpSession session) {
+        setUser(model, session);
         model.addAttribute("item", service.findById(id));
         return "itemDetails";
     }
@@ -78,5 +92,14 @@ public class ItemController {
     public String completedId(@PathVariable("itemId") int id) {
         service.completedId(id);
         return "redirect:/items";
+    }
+
+    private void setUser(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = new User();
+            user.setUserName("Гость");
+        }
+        model.addAttribute("user", user);
     }
 }

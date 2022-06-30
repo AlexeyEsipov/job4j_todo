@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.function.Function;
 
 import ru.job4j.todo.model.Item;
+import ru.job4j.todo.model.User;
 
 @ThreadSafe
 @Repository
@@ -55,15 +56,23 @@ public class ItemStore {
         );
     }
 
-    public List<Item> findAll() {
-        return this.tx(
-            session -> session.createQuery("from Item", Item.class).list()
-        );
+    public List<Item> findAll(User user) {
+        if (user != null && user.getUserId() != 0) {
+            return this.tx(
+                session -> session.createQuery(
+                        "from Item item where item.user = :userId", Item.class)
+                        .setParameter("userId", user)
+                        .list()
+            );
+        } else {
+            return List.of();
+        }
     }
 
     public List<Item> findByName(String key) {
         return this.tx(
-            session -> session.createQuery("from Item  where name = :paramName", Item.class)
+            session -> session.createQuery(
+                    "from Item  where name = :paramName", Item.class)
                     .setParameter("paramName", key).list()
         );
     }
@@ -74,10 +83,14 @@ public class ItemStore {
         );
     }
 
-    public List<Item> condition(boolean done) {
+    public List<Item> condition(User user, boolean done) {
         return this.tx(
-            session -> session.createQuery("from Item  where done = :paramDone", Item.class)
-                    .setParameter("paramDone", done).list()
+            session -> session.createQuery(
+                    "from Item item where item.done = :paramDone and item.user = :userId",
+                            Item.class)
+                    .setParameter("paramDone", done)
+                    .setParameter("userId", user)
+                    .list()
         );
     }
 
