@@ -1,4 +1,5 @@
 package ru.job4j.todo.controller;
+
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import java.util.Optional;
+
 import ru.job4j.todo.model.User;
 import ru.job4j.todo.service.UserService;
 
@@ -47,32 +49,25 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(@ModelAttribute User user, HttpServletRequest req) {
-        String result;
-        Optional<User> userDb = userService.get(
-                user.getEmail(), user.getPhone());
+        Optional<User> userDb = userService.get(user.getEmail(), user.getPhone());
         if (userDb.isEmpty()) {
-            result = "redirect:/loginPage?fail=true";
-        } else {
-            HttpSession session = req.getSession();
-            session.setAttribute("user", userDb.get());
-            result = "redirect:/index";
+            return "redirect:/loginPage?fail=true";
         }
-        return result;
+        HttpSession session = req.getSession();
+        session.setAttribute("user", userDb.get());
+        return "redirect:/index";
     }
 
     @PostMapping("/registration")
     public String registration(Model model, @ModelAttribute User user, HttpSession session) {
-        String result;
         Optional<User> regUser = userService.add(user);
         if (regUser.isEmpty()) {
             model.addAttribute("message", FAIL);
-            result = "fail";
-        } else {
-            setUser(model, session);
-            model.addAttribute("message", SUCCESS);
-            result = "success";
+            return "fail";
         }
-        return result;
+        setUser(model, session);
+        model.addAttribute("message", SUCCESS);
+        return "success";
     }
 
     @PostMapping("/successRedirect")
