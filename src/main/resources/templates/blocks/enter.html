@@ -4,7 +4,7 @@
     <a th:if="${user.userName == 'Гость'}" class="nav-item nav-link" th:href="@{/formRegistration}">Регистрация</a>
     <a class="nav-item nav-link" th:if="${user.userName == 'Гость'}" th:href="@{/loginPage}">
         <span th:text="${user.userName}"></span>
-        <span> | Войти</span>
+        <span> | Войти </span>
     </a>
     <a class="nav-item nav-link" th:if="${user.userName != 'Гость'}" th:href="@{/logout}">
         <span th:text="${user.userName}"></span>

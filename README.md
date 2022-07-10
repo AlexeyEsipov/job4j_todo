@@ -2,24 +2,37 @@
 
 Главная страница
 ![index page](images/index.jpg)
-
-Список всех заданий
-![allItems page](images/allItems.jpg)
-
-Список всех незавершенных заданий
-![notCompletedItem page](images/notCompletedItem.jpg)
-
-Список всех завершенных заданий
-![completedItem page](images/completedItem.jpg)
-
-Добавление нового задания
-![addItem page](images/addItem.jpg)
-
-Выбор варианта действия над заданием
-![detailsItem page](images/detailsItem.jpg)
-
-Редактирование задания
-![editItem page](images/editItem.jpg)
-
-Завершение задания
-![completeItem page](images/completeItem.jpg)
+При переходе по ссылке "Список дел" неавторизованный пользователь попадает 
+на страницу авторизации, где он может зарегистрироваться
+![allItems page](images/registrationAlex.jpg)
+Если регистрация прошла успешно, пользователь видит сообщение, 
+подтверждающее регистрацию и предлагающее авторизоваться.
+![allItems page](images/registrationAlexYes.jpg)
+Если пользователь с такой почтой уже зарегистрирован, то пользователь 
+также получит сообщение о том, что регистрация не подтверждена.
+![allItems page](images/regError.jpg)
+Если пользователь уже зарегистрирован в системе, то по ссылке "Войти"
+он попадает на страницу авторизации
+![notCompletedItem page](images/login.jpg)
+Где вводит свои регистрационные данные
+![notCompletedItem page](images/logAlex.jpg)
+Если регистрационные данные введены неверно, пользователь получит 
+соответствующее сообщение
+![notCompletedItem page](images/err_login.jpg)
+После успешной авторизации пользователь попадает на страницу со своими заданиями. 
+Так как пользователь только зарегистрировался, то список его заданий еще пустой.
+![notCompletedItem page](images/emptyList.jpg)
+По ссылке "Добавить задание" пользователь может разместить задачу в системе
+![notCompletedItem page](images/task1.jpg)
+При наличии заданий список всех задач пользователя выглядит таким образом:
+![notCompletedItem page](images/allTasks.jpg)
+Пользователь может завершить, изменить или удалить задание
+![notCompletedItem page](images/detailTask.jpg)
+Пользователь может отредактировать задание
+![notCompletedItem page](images/editTask.jpg)
+Все неудаленные доступны по ссылке "Все задания"
+![notCompletedItem page](images/allTasks1.jpg)
+Все завершенные задания доступны по ссылке "Завершенные"
+![notCompletedItem page](images/completed.jpg)
+Все незавершенные задания доступны по ссылке "Новые"
+![notCompletedItem page](images/current.jpg)

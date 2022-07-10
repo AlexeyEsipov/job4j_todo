@@ -2,10 +2,10 @@ package ru.job4j.todo.service;
 
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
+import java.util.Optional;
 import ru.job4j.todo.model.User;
 import ru.job4j.todo.store.UserStore;
 
-import java.util.Optional;
 
 @ThreadSafe
 @Service

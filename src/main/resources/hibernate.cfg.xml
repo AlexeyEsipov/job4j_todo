@@ -17,7 +17,6 @@
         <property name="format_sql">true</property>
         <property name="use_sql_comments">true</property>
         <property name="hibernate.jdbc.time_zone">Europe/Moscow</property>
-
         <mapping class="ru.job4j.todo.model.Item" />
         <mapping class="ru.job4j.todo.model.User" />
     </session-factory>
