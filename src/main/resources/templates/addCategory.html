@@ -19,27 +19,33 @@
         </div>
     </nav>
     <div class="row pt-3">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Категория</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="category:${categories}">
+                <td>
+                    <span th:text="${category.name}"></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Новое задание
+                Новая категория
             </div>
             <div class="card-body">
-                <form th:action="@{/createItem}" method="POST">
+                <form th:action="@{/createCategory}" method="POST">
                     <input type="hidden" name="id" value="0"/>
                     <div class="form-group">
-                        <label for="name">Название</label>
+                        <label for="name">Название категории</label>
                         <input type="text" class="form-control" name="name" id="name" required>
-                        <label for="description">Содержание</label>
-                        <input type="text" class="form-control" name="description" id="description" required>
                     </div>
-                    <div class="form-group">
-                        <label for="category.id">Категория</label>
-                        <select class="form-control" id="category.id" name="category.id" multiple="multiple" size="4">
-                            <option th:each="category : ${categories}" th:value="${category.id}"
-                                    th:text="${category.name}"></option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <button type="submit" class="btn btn-primary">Сохранить новую категорию</button>
                 </form>
             </div>
         </div>

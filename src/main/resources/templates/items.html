@@ -7,35 +7,40 @@
 <body>
 <div class="container">
     <th:block th:include="blocks/nav :: div"/>
-    <h4>Все задания пользователя <span th:text="${user.userName}"></span></h4>
+    <h4><span th:text="${message}"></span><span th:text="${user.userName}"></span></h4>
     <div class="row">
-            <table class="table">
+        <table class="table">
             <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Название</th>
-                <th scope="col">Содержание</th>
-                <th scope="col">Дата создания</th>
-                <th scope="col">Состояние</th>
-            </tr>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Название</th>
+                    <th scope="col">Содержание</th>
+                    <th scope="col">Дата создания</th>
+                    <th scope="col">Состояние</th>
+                    <th scope="col">Категория</th>
+                </tr>
             </thead>
             <tbody>
-            <tr th:each="item:${items}">
-                <td th:text="${item.id}"></td>
-                <td>
-                    <a th:href="@{|/itemDetails/${item.id}|}">
-                        <i class="fa fa-pencil-square-o"></i>
-                    </a>
-                    <span th:text="${item.name}"></span>
-                </td>
-                <td th:text="${item.description}"></td>
-                <td th:text="${#dates.format(item.created, 'dd.MM.yyyy')}"></td>
-                <td>
-                    <span th:text="${item.isDone} ? 'Завершено' : 'Не завершено'"></span>
-                </td>
-            </tr>
+                <tr th:each="item:${items}">
+                    <td th:text="${item.id}"></td>
+                    <td>
+                        <a th:href="@{|/itemDetails/${item.id}|}">
+                            <i class="fa fa-pencil-square-o"></i>
+                        </a>
+                        <span th:text="${item.name}"></span>
+                    </td>
+                    <td th:text="${item.description}"></td>
+                    <td th:text="${#dates.format(item.created, 'dd.MM.yyyy')}"></td>
+                    <td>
+                        <span th:text="${item.isDone} ? 'Завершено' : 'Не завершено'"></span>
+                    </td>
+                    <td>
+                       <span th:each="category,iterStat : ${item.getCategories()}"
+                             th:text="${category.name} + ${!iterStat.last ? ', ' : ''}"></span>
+                    </td>
+                </tr>
             </tbody>
-            </table>
+        </table>
     </div>
 </div>
 </body>

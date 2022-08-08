@@ -59,38 +59,35 @@ public class ItemStore {
     public List<Item> findAll(User user) {
         if (user != null && user.getUserId() != 0) {
             return this.tx(
-                session -> session.createQuery(
-                        "from Item item where item.user = :userId", Item.class)
-                        .setParameter("userId", user)
-                        .list()
+                session ->
+                    session.createQuery(
+                            "select distinct item from Item  item join fetch item.categories "
+                               + "where item.user = :userId", Item.class)
+                    .setParameter("userId", user).list()
             );
         } else {
             return List.of();
         }
     }
 
-    public List<Item> findByName(String key) {
-        return this.tx(
-            session -> session.createQuery(
-                    "from Item  where name = :paramName", Item.class)
-                    .setParameter("paramName", key).list()
-        );
-    }
-
     public Item findById(int id) {
         return this.tx(
-            session -> session.get(Item.class, id)
+            session ->
+                session.createQuery(
+                        "select distinct item from Item  item join fetch item.categories"
+                           + " where item.id = :paramId", Item.class)
+                .setParameter("paramId", id).uniqueResult()
         );
     }
 
     public List<Item> condition(User user, boolean done) {
         return this.tx(
-            session -> session.createQuery(
-                    "from Item item where item.done = :paramDone and item.user = :userId",
-                            Item.class)
-                    .setParameter("paramDone", done)
-                    .setParameter("userId", user)
-                    .list()
+            session ->
+                session.createQuery(
+                        "select distinct item from Item item join fetch item.categories "
+                           + "where item.done = :paramDone and item.user = :userId", Item.class)
+                .setParameter("paramDone", done)
+                .setParameter("userId", user).list()
         );
     }
 

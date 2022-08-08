@@ -31,8 +31,8 @@
         <form>
           <span th:if="${!item.isDone}">
             <button type="submit" class="btn btn-success" th:formaction="@{|/completed/${item.id}|}">Завершить задание</button>
-          </span>
             <button type="submit" class="btn btn-info" th:formaction="@{|/formUpdateItem/${item.id}|}">Изменить задание</button>
+          </span>
             <button type="submit" class="btn btn-warning" th:formaction="@{|/delete/${item.id}|}">Удалить задание</button>
         </form>
     </div>

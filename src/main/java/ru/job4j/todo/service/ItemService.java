@@ -2,12 +2,11 @@ package ru.job4j.todo.service;
 
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
-import java.util.Collection;
-import java.util.List;
-
 import ru.job4j.todo.model.Item;
 import ru.job4j.todo.model.User;
 import ru.job4j.todo.store.ItemStore;
+
+import java.util.Collection;
 
 @ThreadSafe
 @Service
@@ -36,10 +35,6 @@ public class ItemService {
 
     public void delete(int id) {
         store.delete(id);
-    }
-
-    public List<Item> findByName(String key) {
-        return store.findByName(key);
     }
 
     public Collection<Item> completed(User user) {

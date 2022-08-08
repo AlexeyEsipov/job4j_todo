@@ -18,6 +18,7 @@
                 <a class="nav-item nav-link" th:href="@{/completed}">Завершенные</a>
                 <a class="nav-item nav-link" th:href="@{/notCompleted}">Новые</a>
                 <a class="nav-item nav-link" th:href="@{/formAddItem}">Добавить задание</a>
+                <a class="nav-item nav-link" th:href="@{/allCategory}">Категории</a>
                 <a th:if="${user.userName == 'Гость'}" class="nav-item nav-link" th:href="@{/formRegistration}">Регистрация</a>
                 <a class="nav-item nav-link" th:if="${user.userName == 'Гость'}" th:href="@{/loginPage}">
                     <span th:text="${user.userName}"></span>
