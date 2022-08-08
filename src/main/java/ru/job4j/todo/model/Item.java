@@ -14,6 +14,7 @@ public class Item {
     private Integer id;
     private String name;
     private String description;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date created;
     private boolean done;
     @ManyToOne

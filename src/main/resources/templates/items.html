@@ -30,7 +30,7 @@
                         <span th:text="${item.name}"></span>
                     </td>
                     <td th:text="${item.description}"></td>
-                    <td th:text="${#dates.format(item.created, 'dd.MM.yyyy')}"></td>
+                    <td th:text="${#dates.format(item.created, 'dd.MM.yyyy HH:mm')}"></td>
                     <td>
                         <span th:text="${item.isDone} ? 'Завершено' : 'Не завершено'"></span>
                     </td>

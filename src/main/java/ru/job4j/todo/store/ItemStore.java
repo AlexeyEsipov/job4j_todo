@@ -26,7 +26,7 @@ public class ItemStore {
     public Item add(Item item) {
         return this.tx(
             session -> {
-                item.setCreated(new Date());
+                item.setCreated(new Date(System.currentTimeMillis()));
                 item.setDone(false);
                 session.save(item);
                 return item;
@@ -38,7 +38,7 @@ public class ItemStore {
         this.tx(
             session -> {
                 item.setId(id);
-                item.setCreated(new Date());
+                item.setCreated(new Date(System.currentTimeMillis()));
                 session.update(item);
                 return session;
             }
