@@ -51,10 +51,8 @@ public class ItemController {
                              @RequestParam(value = "category.id", required = false) List<Integer> categoriesId,
                              HttpSession session) {
         Set<Category> categories = new HashSet<>();
-        if (categoriesId != null) {
-            for (Integer categoryId : categoriesId) {
-                categories.add(categoryService.findById(categoryId));
-            }
+        for (Integer categoryId : categoriesId) {
+            categories.add(categoryService.findById(categoryId));
         }
         item.setCategories(categories);
         item.setUser((User) session.getAttribute("user"));
@@ -67,10 +65,8 @@ public class ItemController {
                              @RequestParam(value = "category.id", required = false) List<Integer> categoriesId,
                              HttpSession session) {
         Set<Category> categories = new HashSet<>();
-        if (categoriesId != null) {
-            for (Integer categoryId : categoriesId) {
-                categories.add(categoryService.findById(categoryId));
-            }
+        for (Integer categoryId : categoriesId) {
+            categories.add(categoryService.findById(categoryId));
         }
         item.setCategories(categories);
         item.setUser((User) session.getAttribute("user"));
