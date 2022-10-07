@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.job4j.todo.model.Category;
-import ru.job4j.todo.model.User;
 import ru.job4j.todo.service.CategoryService;
 
 import javax.servlet.http.HttpSession;
@@ -23,7 +22,7 @@ public class CategoryController {
 
     @GetMapping("/allCategory")
     public String allCategory(Model model, HttpSession session) {
-        setUser(model, session);
+        model.addAttribute("user", session.getAttribute("user"));
         model.addAttribute("categories", service.findAll());
         return "addCategory";
     }
@@ -32,14 +31,5 @@ public class CategoryController {
     public String createCategory(@ModelAttribute Category category) {
         service.add(category);
         return "redirect:/items";
-    }
-
-    private void setUser(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = new User();
-            user.setUserName("Гость");
-        }
-        model.addAttribute("user", user);
     }
 }

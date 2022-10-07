@@ -2,6 +2,7 @@ package ru.job4j.todo.filter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import java.io.IOException;
 import java.util.Set;
 
 @Component
+@Order(0)
 public class AuthFilter implements Filter {
     private static final Logger LOG = LoggerFactory.getLogger(AuthFilter.class.getName());
     private static final Set<String> REG_LOGIN = Set.of(

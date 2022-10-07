@@ -27,7 +27,7 @@ public class UserController {
 
     @GetMapping("/formRegistration")
     public String formRegistration(Model model, HttpSession session) {
-        setUser(model, session);
+        model.addAttribute("user", session.getAttribute("user"));
         return "registration";
     }
 
@@ -62,23 +62,14 @@ public class UserController {
             model.addAttribute("message", FAIL);
             return "fail";
         }
-        setUser(model, session);
+        model.addAttribute("user", session.getAttribute("user"));
         model.addAttribute("message", SUCCESS);
         return "success";
     }
 
     @PostMapping("/successRedirect")
     public String successRedirect(Model model, HttpSession session) {
-        setUser(model, session);
+        model.addAttribute("user", session.getAttribute("user"));
         return "redirect:/loginPage";
-    }
-
-    private void setUser(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = new User();
-            user.setUserName("Гость");
-        }
-        model.addAttribute("user", user);
     }
 }

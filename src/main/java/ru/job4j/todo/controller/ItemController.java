@@ -32,7 +32,7 @@ public class ItemController {
 
     @GetMapping("/items")
     public String items(Model model, HttpSession session) {
-        setUser(model, session);
+        model.addAttribute("user", session.getAttribute("user"));
         User user = (User) model.getAttribute("user");
         model.addAttribute("items", itemService.findAll(user));
         model.addAttribute("message", ALL_TASKS);
@@ -41,7 +41,7 @@ public class ItemController {
 
     @GetMapping("/formAddItem")
     public String formAddItem(Model model, HttpSession session) {
-        setUser(model, session);
+        model.addAttribute("user", session.getAttribute("user"));
         model.addAttribute("categories", categoryService.findAll());
         return "addItem";
     }
@@ -76,7 +76,7 @@ public class ItemController {
 
     @GetMapping("/formUpdateItem/{itemId}")
     public String formUpdateItem(Model model, @PathVariable("itemId") int id, HttpSession session) {
-        setUser(model, session);
+        model.addAttribute("user", session.getAttribute("user"));
         model.addAttribute("item", itemService.findById(id));
         model.addAttribute("categories", categoryService.findAll());
         return "updateItem";
@@ -84,7 +84,7 @@ public class ItemController {
 
     @GetMapping("/completed")
     public String completed(Model model, HttpSession session) {
-        setUser(model, session);
+        model.addAttribute("user", session.getAttribute("user"));
         User user = (User) model.getAttribute("user");
         model.addAttribute("items", itemService.completed(user));
         model.addAttribute("message", COMPLETED);
@@ -93,7 +93,7 @@ public class ItemController {
 
     @GetMapping("/notCompleted")
     public String fresh(Model model, HttpSession session) {
-        setUser(model, session);
+        model.addAttribute("user", session.getAttribute("user"));
         User user = (User) model.getAttribute("user");
         model.addAttribute("items", itemService.notCompleted(user));
         model.addAttribute("message", NOT_COMPLETED);
@@ -102,7 +102,7 @@ public class ItemController {
 
     @GetMapping("/itemDetails/{itemId}")
     public String itemDetails(Model model, @PathVariable("itemId") int id, HttpSession session) {
-        setUser(model, session);
+        model.addAttribute("user", session.getAttribute("user"));
         model.addAttribute("item", itemService.findById(id));
         return "itemDetails";
     }
@@ -117,14 +117,5 @@ public class ItemController {
     public String completedId(@PathVariable("itemId") int id) {
         itemService.completedId(id);
         return "redirect:/items";
-    }
-
-    private void setUser(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = new User();
-            user.setUserName("Гость");
-        }
-        model.addAttribute("user", user);
     }
 }
