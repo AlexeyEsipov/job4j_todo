@@ -1,8 +1,46 @@
+# Приложение Список Дел
+## Используемые технологии:
+![Java](https://img.shields.io/badge/Java--17-ED8B00?style=for-the-badge&logo=java&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot--2.7.3-F2F4F9?style=for-the-badge&logo=spring-boot)
+![Bootstrap](https://img.shields.io/badge/Bootstrap--5.2.2-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
+![PostgresSQL](https://img.shields.io/badge/PostgreSQL--14-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+[![Hibernate](https://img.shields.io/badge/Hibernate--5.6.11.Final-59666C?style=for-the-badge&logo=Hibernate&logoColor=white)](https://hibernate.org/)
+
+![Thymeleaf](https://img.shields.io/badge/Thymeleaf-3.0.0.RELEASE-blue?style=for-the-badge&logo=thymeleaf&logoColor=white)
+![Liquibase](https://img.shields.io/badge/Liquibase-4.9.1-red?style=for-the-badge&logo=liquibase&logoColor=white)
+![Lombok](https://img.shields.io/badge/Lombok-1.18.24-green?style=for-the-badge&logo=lombok&logoColor=white)
+
+Перед запуском установите:
+- PostgreSQL 14
+- Java 17
+- Apache Maven 3.x
+
+## Запуск приложения
+
+1. Создайте базу данных todo:
+```sql
+create database todo;
+```
+
+- Запуск приложения производится с использованием maven.
+  Для перехода в каталог сервиса в командной строке выполните команду
+```
+    cd job4j_todo-main
+```
+- Затем выполните команды:
+```
+    mvn clean install
+    mvn spring-boot:run
+```
+
+и перейдите в браузере на страницу http://localhost:8080/index
+
+### Описание:
 Это приложение можно использовать для формирования и контроля списка предстоящих задач.
 
 
 Главная страница
-![index page](images/index.jpg)
+![index page](images/index.PNG)
 При переходе по ссылке "Список дел" неавторизованный пользователь попадает 
 на страницу авторизации, где он может зарегистрироваться
 ![allItems page](images/1registration.JPG)
@@ -54,3 +92,17 @@
 ![notCompletedItem page](images/18TaskChanged.JPG)
 Как видим, номер задания остается прежним, а вся информация теперь заменена.
 ![notCompletedItem page](images/19Resume.JPG)
+
+Связаться со мной можно по электронной почте a_esipov_it@list.ru
+или в телеграм  @Alex46volokno
+
+
+<div id="socials" align="center">
+    <!-- <a href="linkedin-url">
+    <img src="https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
+  </a> -->
+
+  <a href="https://t.me/alex46volokno">
+    <img src="https://img.shields.io/badge/Telegram-blue?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram"/>
+  </a>
+</div>
