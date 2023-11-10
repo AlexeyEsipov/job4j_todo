@@ -1,4 +1,7 @@
 # Приложение Список Дел
+
+![github actions](https://github.com/AlexeyEsipov/job4j_todo/actions/workflows/maven.yml/badge.svg)
+
 ## Используемые технологии:
 ![Java](https://img.shields.io/badge/Java--17-ED8B00?style=for-the-badge&logo=java&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot--2.7.3-F2F4F9?style=for-the-badge&logo=spring-boot)
